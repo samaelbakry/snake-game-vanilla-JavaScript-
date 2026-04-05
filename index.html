@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Snake — Vanilla JS</title>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <header>
+        <h1>Snake — JavaScript</h1>
+        <div class="hud">
+          <span class="badge">Score: <strong id="score">0</strong></span>
+          <span class="badge">High: <strong id="high">0</strong></span>
+          <span class="badge">Speed: <strong id="speed">1x</strong></span>
+        </div>
+      </header>
+      <div class="board">
+        <canvas id="game" width="480" height="480" aria-label="Snake game board" role="img"></canvas>
+        <aside>
+          <div class="panel legend"><strong>How to Play</strong><br>Use <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> or Arrow Keys to move. Press <kbd>P</kbd> to pause, <kbd>R</kbd> to restart.</div>
+          <div class="panel legend"><strong>Goal</strong><br>Eat food to grow. Avoid hitting walls or yourself. Game speeds up every few bites.</div>
+          <div class="panel">
+            <div style="font-weight:600;margin-bottom:.35rem">Touch Controls</div>
+            <div class="controls">
+              <span></span>
+              <button class="btn" data-dir="up">▲</button>
+              <span></span>
+              <button class="btn" data-dir="left">◀</button>
+              <button class="btn" data-dir="down">▼</button>
+              <button class="btn" data-dir="right">▶</button>
+            </div>
+          </div>
+          <div class="panel cta">
+            <button class="btn" id="pauseBtn">⏸ Pause</button>
+            <button class="btn" id="resetBtn">🔄 Restart</button>
+          </div>
+          <div class="panel legend">Built with <code>&lt;canvas&gt;</code>, a fixed-timestep game loop, and simple grid collisions. Cleanly split into state → update → render. Persisted high score via <code>localStorage</code>.</div>
+        </aside>
+      </div>
+    </div>
+  </div>
+    <script src="./index.js"></script>
+</body>
+</html>
