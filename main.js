@@ -1,5 +1,4 @@
 "use strict";
-
 (function () {
   const GRID = 24;
   const CELL = 20;
@@ -13,13 +12,13 @@
 
   const c = document.getElementById("game");
   const ctx = c.getContext("2d");
-  c.width = c.height = GRID * CELL;
-
   const scoreEl = document.getElementById("score");
   const highEl = document.getElementById("high");
   const speedEl = document.getElementById("speed");
   const pauseBtn = document.getElementById("pauseBtn");
   const resetBtn = document.getElementById("resetBtn");
+
+  c.width = c.height = GRID * CELL;
 
   const COL = {
     grid: "rgba(225,225,225,.18)",
@@ -28,7 +27,7 @@
     head: getCss("--head", "#34d399"),
   };
 
-  function getCss(name, fallback) {
+  function getCss(name , fallback) {
     return (
       getComputedStyle(document.documentElement)
         .getPropertyValue(name)
@@ -66,7 +65,6 @@
       speedStage: 0,
       over: false,
     };
-
     updateHUD();
   }
 
@@ -81,18 +79,16 @@
     scoreEl.textContent = state.score;
 
     const high = Math.max(
-      Number(localStorage.getItem("snake_high")) || 0,
-      state.score
+      Number(localStorage.getItem("high_score")) || 0,
+      state.score,
     );
 
-    localStorage.setItem("snake_high", high);
-
+    localStorage.setItem("high_score",high);
     highEl.textContent = high;
 
     speedEl.textContent =
       Math.pow(SPEED_FACTOR, state.speedStage).toFixed(2) + "x";
-
-    pauseBtn.textContent = running ? "Pause" : "Play";
+    pauseBtn.textContent = running ? "pause" : "play";
   }
 
   function setDirection(nx, ny) {
@@ -121,7 +117,6 @@
   }
 
   pauseBtn.addEventListener("click", togglePause);
-
   resetBtn.addEventListener("click", () => {
     init();
     running = true;
@@ -130,7 +125,6 @@
   document.querySelectorAll("[data-dir]").forEach((btn) => {
     btn.addEventListener("click", () => {
       const d = btn.getAttribute("data-dir");
-
       if (d === "up") setDirection(0, -1);
       else if (d === "down") setDirection(0, 1);
       else if (d === "left") setDirection(-1, 0);
@@ -141,7 +135,6 @@
   function frame(t) {
     const dt = t - tPrev;
     tPrev = t;
-
     acc += dt;
 
     while (acc >= stepMs) {
@@ -150,7 +143,6 @@
       }
       acc -= stepMs;
     }
-
     render();
     requestAnimationFrame(frame);
   }
@@ -196,7 +188,6 @@
 
   function fillColorfulBackground() {
     const g = ctx.createLinearGradient(0, 0, c.width, c.height);
-
     g.addColorStop(0.0, `hsl(${hue}, 75%, 14%)`);
     g.addColorStop(0.5, `hsl(${(hue + 60) % 360}, 70%, 18%)`);
     g.addColorStop(1.0, `hsl(${(hue + 120) % 360}, 75%, 14%)`);
@@ -206,7 +197,6 @@
 
     if (ANIMATED_BG) hue = (hue + 0.4) % 360;
   }
-
   function render() {
     fillColorfulBackground();
 
